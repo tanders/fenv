@@ -1,11 +1,7 @@
 (in-package :fe)
 
 ;;;
-;;; there is an example in ../tests/test-fenv.lisp for (hopefully) every function
-;;;
-
-;;;
-;;; Defines means and abstractions to use numerical functions as envelopes
+;;; Defines ways to use numerical functions as envelopes,
 ;;; and provides a rich set of functions to generate, combine and transform
 ;;; these envelopes.
 ;;; 
@@ -48,7 +44,7 @@
   (let ((xs (loop for n from 0 to 1 by (/ 1 (1- number))
 		  collect n))
 	(ys (first (ccl::pwgl-sample BPF number))))
-    (linear-fenv (pw::mat-trans (list xs ys)))))
+    (mk-linear-fenv (pw::mat-trans (list xs ys)))))
 
 
 (defun fenv->list (fenv &optional (number 100))
@@ -196,7 +192,7 @@ BUG: Definition wrong -- slope completely bogus!"
 
 (defun triangle-fenv (n &key (amplitude 1) (offset 0))
   (scale-fenv
-   (osciallator (linear-fenv '((0 -1) (0.5 1) (1 -1))) n)
+   (osciallator (mk-linear-fenv '((0 -1) (0.5 1) (1 -1))) n)
    amplitude offset))
 
 (defun square-fenv (n &key (amplitude 1) (offset 0))
