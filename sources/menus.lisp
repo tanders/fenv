@@ -7,7 +7,7 @@
     (("Accessing fenv data" (fenv->BPF 
 			     fenv->list y fenv?))
      ("Concrete generators" (BPF->fenv mk-linear-fenv mk-sin-fenv mk-sin-fenv1
-			     sin-fenv saw-fenv saw1-fenv triangle-fenv square-fenv
+			     sin-fenv tan-fenv saw-fenv saw1-fenv triangle-fenv square-fenv
 			     steps-fenv random-steps-fenv rising-expon-fenv constant-fenv))
      ("Generic generators" (make-fenv make-fenv1 
 			    ; points->fenv ; likely too complicated for general users

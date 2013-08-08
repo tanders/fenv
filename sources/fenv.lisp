@@ -111,7 +111,7 @@ Missing
 ;;;
 
 (defun make-fenv (func &key (min 0) (max 1))
-  "Builds a fenv from a given numeric function, such that interval [0,1] ofthe resulting env-func is mapped to [min, max] of the argument function."
+  "Builds a fenv from a given numeric function, such that interval [0,1] of the resulting env-func is mapped to [min, max] of the argument function."
   (make-instance 'fenv
     :fenv #'(lambda (x)
 	     (assert (<= 0 x 1))
@@ -221,10 +221,13 @@ BUG: Definition wrong -- slope completely bogus!"
       (aux fenvs points))))
 
 (defun sin-fenv (n &key (phase 0) (amplitude 1) (offset 0))
-  "Defines an fenv of saw shape (ascending) with n periods."
-  (scale-fenv
-   (osciallator (make-fenv #'(lambda (x) (sin (+ x phase))))
-		n)
+  "Defines an fenv of sin shape with n periods. Phase is measured in cycles, i.e., 0.5 means sin is mirrored along x axis."
+  (scale-fenv (make-fenv #'(lambda (x) (sin (* (* (+ x phase) pi 2) n))))
+   amplitude offset))
+
+(defun tan-fenv (n &key (phase 0) (amplitude 1) (offset 0))
+  "Defines an fenv of tan shape with n periods. Phase is measured in cycles, i.e., 0.5 means sin is mirrored along x axis."
+  (scale-fenv (make-fenv #'(lambda (x) (tan (* (* (+ x phase) pi 2) n))))
    amplitude offset))
 
 (defun saw-fenv (n &key (amplitude 1) (offset 0))
