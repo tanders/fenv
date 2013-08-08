@@ -16,6 +16,49 @@
 
 |#
 
+
+#|
+
+PWGL BPF interface
+There are more BPF functions documented, see graphical apropos interface Info Center
+
+(ccl::break-point-function-p BPF)
+
+(ccl::pwgl-sample BPF n)
+
+(ccl::mk-bpf time-list value-list)
+; ccl::2D-bpf-constructor I could not get working
+
+(defun ccl::mk2D-object  (type args)
+ (apply
+ (ccl::2d-constructor-function-name (ccl::keyword-to-2D-class type))
+ args))
+
+
+(ccl::bpf-out BPF time)
+Returns the BPF value at time (i.e., the y value of the given x value)
+
+(ccl::x-points BPF)
+(ccl::y-points BPF)
+
+(ccl::bpf-adjacent-points BPF time)
+Returns at the given time the two closest points before and after in format ((time1 time2) (value1 value2)
+-> can be used to implement getting the y value of a given x value with some trigonometry
+ 
+ccl::current-bpf 
+See doc
+
+ccl::bpf-x-scaling* 
+for scaling a BPF
+
+Missing
+
+- Getting the range of x values -- use min and max of ccl::x-points
+- Getting the y value at a given x value -- use ccl::bpf-out
+
+|#
+
+
 ;;;
 ;;; data structure
 ;;;
@@ -43,7 +86,7 @@
   "Samples a BPF and translates it into a fenv in [0, 1], which in turn linearily interpolates between samples. Number is number of samples."
   (let ((xs (loop for n from 0 to 1 by (/ 1 (1- number))
 		  collect n))
-	(ys (first (ccl::pwgl-sample BPF number))))
+	(ys (ccl::pwgl-sample BPF number)))
     (mk-linear-fenv (pw::mat-trans (list xs ys)))))
 
 
@@ -55,13 +98,12 @@
 
 ; (fenv->list (make-fenv #'sin :max pi) 10)
 
-;; BUG: always returns NIL -- seemingly the 1st argument needs to be something different
-;; TODO:
-;; - Decide x values to use for resulting BPFs. x values of fenvs are always in [0, 1] and x values of BPF are by default the sequence (0, 1, 2, ...). Which convention should I use?
-;; - Add additional optional BPF args color and name
-(defun fenv->BPF (fenv &optional (number 1000))
-  "Samples a fenv from 0 to 1 (including) and translates it into a BPF, which in turn linearily interpolates between samples. Number is number of samples (if number=1, then the last fenv value is returned)."
-  (ccl::2D-bpf-constructor :bpf (fenv->list fenv number)))
+
+(defun fenv->BPF (fenv &key (min 0) (max 1) (number 100))
+  "Samples a fenv from 0 to 1 (including) and translates it into a BPF running from the x values min to max (key args), which in turn linearily interpolates between samples. Number is number of samples."
+  (ccl::mk-bpf (loop for i from min to max by (/ (- max min) (1- number))
+		     collect i)
+	       (fenv->list fenv number)))
   
 
 ;;;
@@ -178,6 +220,13 @@ BUG: Definition wrong -- slope completely bogus!"
 			collect i)))
       (aux fenvs points))))
 
+(defun sin-fenv (n &key (phase 0) (amplitude 1) (offset 0))
+  "Defines an fenv of saw shape (ascending) with n periods."
+  (scale-fenv
+   (osciallator (make-fenv #'(lambda (x) (sin (+ x phase))))
+		n)
+   amplitude offset))
+
 (defun saw-fenv (n &key (amplitude 1) (offset 0))
   "Defines an fenv of saw shape (ascending) with n periods."
   (scale-fenv
@@ -252,6 +301,7 @@ BUG: Definition wrong -- slope completely bogus!"
 (defun multiply-fenvs (&rest fenvs)
   "Returns a fenv which adds all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order."
   (apply #'combine-fenvs (cons #'* fenvs)))
+
 
 
 
