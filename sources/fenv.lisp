@@ -263,6 +263,17 @@ BUG: Definition wrong -- slope completely bogus!"
   (funcs->fenv (mapcar #'(lambda (x) #'(lambda (ignore) x))
 			   numbers)))
 
+(defun random-fenv (&key (min-y 0.0) (max-y 1.0))
+  "A fenv of random numbers between min-y and max-y, which can be numbers or other fenvs."
+  (assert (<= min-y max-y))
+  (make-fenv #'(lambda (x)
+		 (pw::g-random (if (fenv? min-y) 
+				   (y min-y x)
+				   min-y)
+			       (if (fenv? max-y) 
+				   (y max-y x)
+				   max-y)))))
+
 (defun random-steps-fenv (n &key (min-y 0.0) (max-y 1.0))
   (assert (<= min-y max-y))
   (apply #'steps
@@ -306,6 +317,14 @@ BUG: Definition wrong -- slope completely bogus!"
   (apply #'combine-fenvs (cons #'* fenvs)))
 
 
+(defun expt-fenvs (fenv1 fenv2)
+  "Returns a fenv which adds all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order."
+  (apply #'combine-fenvs (list #'expt fenv1 fenv2)))
+
+
+(defun randomise-fenv (fenv &key (max-random-offset 1.0))
+  "Returns a randomised version of fenv, were y values can be over/under compared to fenv by up to max-random-offset. max-random-offset can be a number or another fenv."
+  (add-fenvs fenv (random-fenv :min-y (* -1 max-random-offset) :max-y max-random-offset)))
 
 
 (defun reverse-fenv (fenv)
