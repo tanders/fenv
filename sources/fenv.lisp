@@ -6,58 +6,6 @@
 ;;; these envelopes.
 ;;; 
 
-#| TODO:
-
-- Def equivalent of method y for a BPF, once Mika or Mikael tell me how
-
-- Define boxes with PWGLDef for all definitions, to have their documentation -- or wait for having the doc string of functions shown in PWGL.
-
-- OK !! For all method defs that I want to use directly as boxes and that have optional args (e.g., keyword args) change them into functions (optional args are not supported for methods)
-
-|#
-
-
-#|
-
-PWGL BPF interface
-There are more BPF functions documented, see graphical apropos interface Info Center
-
-(ccl::break-point-function-p BPF)
-
-(ccl::pwgl-sample BPF n)
-
-(ccl::mk-bpf time-list value-list)
-; ccl::2D-bpf-constructor I could not get working
-
-(defun ccl::mk2D-object  (type args)
- (apply
- (ccl::2d-constructor-function-name (ccl::keyword-to-2D-class type))
- args))
-
-
-(ccl::bpf-out BPF time)
-Returns the BPF value at time (i.e., the y value of the given x value)
-
-(ccl::x-points BPF)
-(ccl::y-points BPF)
-
-(ccl::bpf-adjacent-points BPF time)
-Returns at the given time the two closest points before and after in format ((time1 time2) (value1 value2)
--> can be used to implement getting the y value of a given x value with some trigonometry
- 
-ccl::current-bpf 
-See doc
-
-ccl::bpf-x-scaling* 
-for scaling a BPF
-
-Missing
-
-- Getting the range of x values -- use min and max of ccl::x-points
-- Getting the y value at a given x value -- use ccl::bpf-out
-
-|#
-
 
 ;;;
 ;;; data structure
@@ -79,16 +27,6 @@ Missing
   "Access the y value of fenv at x."
   (funcall (fenv fenv) x))
 
-;; TODO: 
-;; - Hack using sampling -- replace this once I know how to access y values of PBFs directly
-;; - once I know how to extract the min/max from a BPF then use those automatically
-(defun BPF->fenv (BPF &key (number 100))
-  "Samples a BPF and translates it into a fenv in [0, 1], which in turn linearily interpolates between samples. Number is number of samples."
-  (let ((xs (loop for n from 0 to 1 by (/ 1 (1- number))
-		  collect n))
-	(ys (ccl::pwgl-sample BPF number)))
-    (mk-linear-fenv (pw::mat-trans (list xs ys)))))
-
 
 (defun fenv->list (fenv &optional (number 100))
   "Samples a fenv from 0 to 1 (including) and collects samples in a list. Number is number of samples (if number=1, then the last fenv value is returned)."
@@ -99,12 +37,13 @@ Missing
 ; (fenv->list (make-fenv #'sin :max pi) 10)
 
 
-(defun fenv->BPF (fenv &key (min 0) (max 1) (number 100))
-  "Samples a fenv from 0 to 1 (including) and translates it into a BPF running from the x values min to max (key args), which in turn linearily interpolates between samples. Number is number of samples."
-  (ccl::mk-bpf (loop for i from min to max by (/ (- max min) (1- number))
-		     collect i)
-	       (fenv->list fenv number)))
-  
+(defun fenv->vector (fenv &optional (number 100))
+  "Samples a fenv from 0 to 1 (including) and collects samples in a vector. Number is number of samples (if number=1, then the last fenv value is returned)."
+  (apply #'vector (fenv->list fenv number)))
+
+(defun v (fenv &optional number)
+  "Shorthand name function for fe:fenv->vector. Convenience function for using fenvs in Opusmodus."
+  (fenv->vector fenv number))
 
 ;;;
 ;;; generators
@@ -148,39 +87,39 @@ Missing
 					:min x1 :max x2))
 		    points))
 
-(defun mk-sin-fenv (points)
-  "Returns a fenv which interpolates the given points by a sin function. Using only the intervals [0,pi/2] and [pi, 3pi/4] results in edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
-  (points->fenv #'(lambda (x1 y1 x2 y2)
-			(make-fenv1
-			 #'(lambda (x)
-			     (+ (* (sin (* x pi 0.5)) 
-				   (- y2 y1))
-				y1))
-			 :min x1 :max x2))
-		    points))
+;; (defun mk-sin-fenv (points)
+;;   "Returns a fenv which interpolates the given points by a sin function. Using only the intervals [0,pi/2] and [pi, 3pi/4] results in edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
+;;   (points->fenv #'(lambda (x1 y1 x2 y2)
+;; 			(make-fenv1
+;; 			 #'(lambda (x)
+;; 			     (+ (* (sin (* x pi 0.5)) 
+;; 				   (- y2 y1))
+;; 				y1))
+;; 			 :min x1 :max x2))
+;; 		    points))
 
-(defun mk-sin-fenv1 (points)
-  "Returns a fenv which interpolates the given points by a sin function without clear edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
-  (points->fenv #'(lambda (x1 y1 x2 y2)
-			(make-fenv1
-			 #'(lambda (x)
-			     (+ (* (+ (* (sin (- (* x pi) (* pi 0.5)))
-					 0.5)
-				      0.5)
-				   (- y2 y1))
-				y1))
-			 :min x1 :max x2))
-		    points))
+;; (defun mk-sin-fenv1 (points)
+;;   "Returns a fenv which interpolates the given points by a sin function without clear edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
+;;   (points->fenv #'(lambda (x1 y1 x2 y2)
+;; 			(make-fenv1
+;; 			 #'(lambda (x)
+;; 			     (+ (* (+ (* (sin (- (* x pi) (* pi 0.5)))
+;; 					 0.5)
+;; 				      0.5)
+;; 				   (- y2 y1))
+;; 				y1))
+;; 			 :min x1 :max x2))
+;; 		    points))
 
-(defun mk-expon-fenv-fn (points)
-  "Returns a fenv described be exponential functions. Expects a list of x-y-pairs as (0 y1) ... (1 yn). y values can not be negative.
+;; (defun mk-expon-fenv-fn (points)
+;;   "Returns a fenv described be exponential functions. Expects a list of x-y-pairs as (0 y1) ... (1 yn). y values can not be negative.
 
-BUG: Definition wrong -- slope completely bogus!"
-  (points->fenv #'(lambda (x1 x2 y1 y2)
-			(make-fenv1 #'(lambda (x)
-					    (+ (expt (/ y2 y1) x) y1 -1))
-					:min x1 :max x2))
-		    points))
+;; BUG: Definition wrong -- slope completely bogus!"
+;;   (points->fenv #'(lambda (x1 x2 y1 y2)
+;; 			(make-fenv1 #'(lambda (x)
+;; 					    (+ (expt (/ y2 y1) x) y1 -1))
+;; 					:min x1 :max x2))
+;; 		    points))
 
 
 (flet ((aux (fenvs points)
@@ -220,7 +159,8 @@ BUG: Definition wrong -- slope completely bogus!"
 			collect i)))
       (aux fenvs points))))
 
-(defun sin-fenv (n &key (phase 0) (amplitude 1) (offset 0))
+;; inconsistently named, but function name sin-fenv already taken by a macro
+(defun mk-sin-fenv (n &key (phase 0) (amplitude 1) (offset 0))
   "Defines an fenv of sin shape with n periods. Phase is measured in cycles, i.e., 0.5 means sin is mirrored along x axis."
   (scale-fenv (make-fenv #'(lambda (x) (sin (* (* (+ x phase) pi 2) n))))
    amplitude offset))
@@ -263,6 +203,7 @@ BUG: Definition wrong -- slope completely bogus!"
   (funcs->fenv (mapcar #'(lambda (x) #'(lambda (ignore) x))
 			   numbers)))
 
+#| ;; currently depends on pw::g-random
 (defun random-fenv (&key (min-y 0.0) (max-y 1.0))
   "A fenv of random numbers between min-y and max-y, which can be numbers or other fenvs."
   (assert (<= min-y max-y))
@@ -273,6 +214,7 @@ BUG: Definition wrong -- slope completely bogus!"
 			       (if (fenv? max-y) 
 				   (y max-y x)
 				   max-y)))))
+|#
 
 (defun random-steps-fenv (n &key (min-y 0.0) (max-y 1.0))
   (assert (<= min-y max-y))

@@ -1,9 +1,13 @@
 (in-package :fe)
 
 (export '(;; data structure
-	  fenv fenv->list y fenv?
+	  fenv y fenv?
+	  fenv->list fenv->vector v
+	  ;; macros
+	  linear-fenv sin-fenv sin-fenv1 expon-fenv
+	  linear-fenv-fn sin-fenv-fn sin-fenv1-fn expon-fenv-fn
 	  ;; Concrete generators
-	  BPF->fenv mk-linear-fenv mk-sin-fenv mk-sin-fenv1
+	  mk-sin-fenv
 	  saw-fenv saw1-fenv triangle-fenv square-fenv
 	  steps-fenv random-steps-fenv rising-expon-fenv constant-fenv
 	  ;; Generic generators
