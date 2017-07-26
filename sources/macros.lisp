@@ -15,6 +15,7 @@
   `(linear-fenv-fn ',points))
 
 (defun sin-fenv-fn (points)
+  "Returns a fenv which interpolates the given points by a sin function. Using only the intervals [0,pi/2] and [pi, 3pi/4] results in edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
   (points->fenv #'(lambda (x1 y1 x2 y2)
 			(make-fenv1
 			 #'(lambda (x)
@@ -29,6 +30,7 @@
   `(sin-fenv-fn ',points))
 
 (defun sin-fenv1-fn (points)
+  "Returns a fenv which interpolates the given points by a sin function without clear edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
   (points->fenv #'(lambda (x1 y1 x2 y2)
 			(make-fenv1
 			 #'(lambda (x)
@@ -46,6 +48,9 @@
 
 ;; !!! noch voellig falsch: die Steilheit stimmt nicht !!!
 (defun expon-fenv-fn (points)
+  "Returns a fenv described be exponential functions. Expects a list of x-y-pairs as (0 y1) ... (1 yn). y values can not be negative.
+
+BUG: Definition wrong -- slope completely bogus!"
   (points->fenv #'(lambda (x1 x2 y1 y2)
 			(make-fenv1 #'(lambda (x)
 					    (+ (expt (/ y2 y1) x) y1 -1))
@@ -54,4 +59,4 @@
 
 (defmacro expon-fenv (&rest points)
   "Defines an envelope described be exponential functions. Expects a list of x-y-pairs as (0 y1) ... (1 yn). y values can not be negative."
-  `(expon-env-fn ',points))
+  `(expon-fenv-fn ',points))
