@@ -1,0 +1,1219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../cludg.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<title>
+fenv</title>
+</head>
+<body>
+<div id="navbar">
+<table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+<colgroup span="3">
+<col width="0*"/>
+<col width="0*"/>
+<col width="1*"/>
+</colgroup>
+<tr>
+<td align="left" valign="baseline">
+<a href="macros.html">
+Prev:&nbsp;macros</a>
+<br/>
+<a href="export.html">
+Next:&nbsp;export</a>
+</td>
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="left" valign="baseline">
+<span class="upchain">
+<b>
+fenv</b>
+<br/>
+<a href="../index.html">
+Index</a>
+</span>
+&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+</div>
+<div class="cludg-doc-body">
+<h2>
+fenv
+</h2>
+<table style="width: 100%;" class="summary-table">
+<tr class="table-heading-color">
+<th class="summary" colspan="2">
+Class summary</th>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238922">
+fenv</a>
+</td>
+<td class="summary">
+</td>
+</tr>
+</table>
+<table style="width: 100%;" class="summary-table">
+<tr class="table-heading-color">
+<th class="summary" colspan="2">
+Method summary</th>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238923">
+fenv</a>
+</td>
+<td class="summary">
+fenv</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238924">
+fenv?</a>
+</td>
+<td class="summary">
+(x fenv)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238925">
+fenv?</a>
+</td>
+<td class="summary">
+(x t)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238926">
+y</a>
+</td>
+<td class="summary">
+(fenv fenv) (x number)</td>
+</tr>
+</table>
+<table style="width: 100%;" class="summary-table">
+<tr class="table-heading-color">
+<th class="summary" colspan="2">
+Function summary</th>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238945">
+add-fenvs</a>
+</td>
+<td class="summary">
+<em>&amp;rest</em> fenvs</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238953">
+at-even-position</a>
+</td>
+<td class="summary">
+in-list</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238944">
+combine-fenvs</a>
+</td>
+<td class="summary">
+combi-func <em>&amp;rest</em> fenvs</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238943">
+constant-fenv</a>
+</td>
+<td class="summary">
+value</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238947">
+expt-fenvs</a>
+</td>
+<td class="summary">
+fenv1 fenv2</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238927">
+fenv-&gt;list</a>
+</td>
+<td class="summary">
+fenv <em>&amp;optional</em> (number 100)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238928">
+fenv-&gt;vector</a>
+</td>
+<td class="summary">
+fenv <em>&amp;optional</em> (number 100)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238930">
+make-fenv</a>
+</td>
+<td class="summary">
+func <em>&amp;key</em> (min 0) (max 1)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238931">
+make-fenv1</a>
+</td>
+<td class="summary">
+func <em>&amp;key</em> (min 0) (max 1)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238933">
+mk-linear-fenv</a>
+</td>
+<td class="summary">
+points</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238934">
+mk-sin-fenv</a>
+</td>
+<td class="summary">
+n <em>&amp;key</em> (phase 0) (amplitude 1) (offset 0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238946">
+multiply-fenvs</a>
+</td>
+<td class="summary">
+<em>&amp;rest</em> fenvs</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238932">
+points-&gt;fenv</a>
+</td>
+<td class="summary">
+func points</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238941">
+random-steps-fenv</a>
+</td>
+<td class="summary">
+n <em>&amp;key</em> (min-y 0.0) (max-y 1.0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238948">
+randomise-fenv</a>
+</td>
+<td class="summary">
+fenv <em>&amp;key</em> (max-random-offset 1.0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238951">
+rescale-fenv</a>
+</td>
+<td class="summary">
+fenv <em>&amp;key</em> oldmin oldmax newmin newmax</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238949">
+reverse-fenv</a>
+</td>
+<td class="summary">
+fenv</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238942">
+rising-expon-fenv</a>
+</td>
+<td class="summary">
+shape</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238936">
+saw-fenv</a>
+</td>
+<td class="summary">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238937">
+saw1-fenv</a>
+</td>
+<td class="summary">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238950">
+scale-fenv</a>
+</td>
+<td class="summary">
+fenv mul add</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238939">
+square-fenv</a>
+</td>
+<td class="summary">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238940">
+steps-fenv</a>
+</td>
+<td class="summary">
+<em>&amp;rest</em> numbers</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238935">
+tan-fenv</a>
+</td>
+<td class="summary">
+n <em>&amp;key</em> (phase 0) (amplitude 1) (offset 0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238938">
+triangle-fenv</a>
+</td>
+<td class="summary">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238929">
+v</a>
+</td>
+<td class="summary">
+fenv <em>&amp;optional</em> number</td>
+</tr>
+<tr class="table-row-color">
+<td class="summary-name">
+<a href="fenv.html#_g238952">
+waveshape</a>
+</td>
+<td class="summary">
+fenv1 fenv2</td>
+</tr>
+</table>
+<div class="defclass">
+<div class="defunsignatures">
+<a id="_g238922">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+</td>
+<td class="symbol-type">
+&nbsp;[Class]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="defclass-initargs">
+<div>
+<div>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+:fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+</td>
+<td class="symbol-type">
+&nbsp;[Initarg]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="defclass-slots-doc">
+<div>
+<div>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+</td>
+<td class="symbol-type">
+&nbsp;[Slot]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+A unary numeric function, which defines an envelope in the function interval [0,1]. 
+ </p>
+</div>
+</div>
+</div>
+<div class="defclass-generics">
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238923">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv</td>
+<td class="symbol-type">
+&nbsp;[Generic&nbsp;function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns and (with setf) changes the fenv of the specified fenv 
+ </p>
+</div>
+</div>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238924">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+fenv?&nbsp;&nbsp;</td>
+<td class="lambda-list">
+(x fenv)</td>
+<td class="symbol-type">
+&nbsp;[Method]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238925">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+fenv?&nbsp;&nbsp;</td>
+<td class="lambda-list">
+(x t)</td>
+<td class="symbol-type">
+&nbsp;[Method]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238926">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+y&nbsp;&nbsp;</td>
+<td class="lambda-list">
+(fenv fenv) (x number)</td>
+<td class="symbol-type">
+&nbsp;[Method]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Access the y value of fenv at x. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238927">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+fenv-&gt;list&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv <em>&amp;optional</em> (number 100)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Samples a fenv from 0 to 1 (including) and collects samples in a list. Number is number of samples (if number=1, then the last fenv value is returned). 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238928">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+fenv-&gt;vector&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv <em>&amp;optional</em> (number 100)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Samples a fenv from 0 to 1 (including) and collects samples in a vector. Number is number of samples (if number=1, then the last fenv value is returned). 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238929">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+v&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv <em>&amp;optional</em> number</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Shorthand name function for fe:fenv-&gt;vector. Convenience function for using fenvs in Opusmodus. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238930">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+make-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+func <em>&amp;key</em> (min 0) (max 1)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Builds a fenv from a given numeric function, such that interval [0,1] of the resulting env-func is mapped to [min, max] of the argument function. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238931">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+make-fenv1&nbsp;&nbsp;</td>
+<td class="lambda-list">
+func <em>&amp;key</em> (min 0) (max 1)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Builds a fenv from a given numeric function, such that interval [min,max] of resulting fenv is mapped to [0,1] of the argument function. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238932">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+points-&gt;fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+func points</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Converts a list of points to a single fenv. A point is an x-y-pair as (xi yi). x values of the points range from 0--i (including), e.g., ((0 y1) (x2 y2) ... (1 yn)). The function defines the shape of the fenv segments and must return a fenv. It expects four numeric arguments, which describe the start and end points of the segment in the form (x1 y1 x2 y2). 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238933">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+mk-linear-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+points</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns a fenv which interpolates the given points by a linear function. Expects a list of x-y-pairs as (0 y1) ... (1 yn) 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238934">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+mk-sin-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+n <em>&amp;key</em> (phase 0) (amplitude 1) (offset 0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Defines an fenv of sin shape with n periods. Phase is measured in cycles, i.e., 0.5 means sin is mirrored along x axis. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238935">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+tan-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+n <em>&amp;key</em> (phase 0) (amplitude 1) (offset 0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Defines an fenv of tan shape with n periods. Phase is measured in cycles, i.e., 0.5 means sin is mirrored along x axis. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238936">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+saw-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Defines an fenv of saw shape (ascending) with n periods. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238937">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+saw1-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Defines an fenv of saw shape (descending) with n periods. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238938">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+triangle-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238939">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+square-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+n <em>&amp;key</em> (amplitude 1) (offset 0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238940">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+steps-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+<em>&amp;rest</em> numbers</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Outputs a fenv composed of constant functions defined by numbers. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238941">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+random-steps-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+n <em>&amp;key</em> (min-y 0.0) (max-y 1.0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238942">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+rising-expon-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+shape</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Outputs an rising fenv with exponential shape. y in interval (0, 1]. The bigger shape is the steeper the fenv is. shape must be &gt; 0. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238943">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+constant-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+value</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238944">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+combine-fenvs&nbsp;&nbsp;</td>
+<td class="lambda-list">
+combi-func <em>&amp;rest</em> fenvs</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns a fenv which combines the given fenvs with an n-ary numeric function. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order. The combine-func must except as much numeric values as arguments to fenv are given. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238945">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+add-fenvs&nbsp;&nbsp;</td>
+<td class="lambda-list">
+<em>&amp;rest</em> fenvs</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns a fenv which adds all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238946">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+multiply-fenvs&nbsp;&nbsp;</td>
+<td class="lambda-list">
+<em>&amp;rest</em> fenvs</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns a fenv which adds all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238947">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+expt-fenvs&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv1 fenv2</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns a fenv which adds all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238948">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+randomise-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv <em>&amp;key</em> (max-random-offset 1.0)</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns a randomised version of fenv, were y values can be over/under compared to fenv by up to max-random-offset. max-random-offset can be a number or another fenv. 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238949">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+reverse-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238950">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+scale-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv mul add</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238951">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+rescale-fenv&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv <em>&amp;key</em> oldmin oldmax newmin newmax</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238952">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+waveshape&nbsp;&nbsp;</td>
+<td class="lambda-list">
+fenv1 fenv2</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="doc-body">
+<p>
+Returns an fenv which reads fenv1 'through' fenv2: the y value of fenv2 at a given x value access the y of fenv1 (take care to keep output of fenv2 in interval [0,1]). 
+ </p>
+</div>
+</div>
+<div class="defun">
+<div class="defunsignatures">
+<a id="_g238953">
+</a>
+<table cellpadding="0" cellspacing="0" width="100%">
+<colgroup span="3">
+<col width="0*"/>
+<col width="1*"/>
+<col width="0*"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="symbol-name">
+at-even-position&nbsp;&nbsp;</td>
+<td class="lambda-list">
+in-list</td>
+<td class="symbol-type">
+&nbsp;[Function]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cludg-footer">
+Generated by&nbsp;<a href="mailto:ihatchondo@common-lisp.net" lang="en">
+CLDOC</a>
+- 2017-07-26 21:30:37</div>
+</body>
+</html>
