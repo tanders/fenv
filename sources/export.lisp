@@ -11,7 +11,7 @@
 	  saw-fenv saw1-fenv triangle-fenv square-fenv
 	  steps-fenv random-steps-fenv rising-expon-fenv constant-fenv
 	  ;; Generic generators
-	  make-fenv make-fenv1 points->fenv
+	  make-fenv make-fenv1 points->fenv list->fenv
 	  funcs->fenv fenv-seq osciallator
 	  ;; Transformers
 	  add-fenvs multiply-fenvs reverse-fenv scale-fenv rescale-fenv

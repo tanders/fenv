@@ -89,7 +89,14 @@
 			(make-fenv1 #'(lambda (x)
 					    (+ (* (- y2 y1) x) y1))
 					:min x1 :max x2))
-		    points))
+		points))
+
+(defun list->fenv (numbers)
+  "Translates a list of numbers into a fenv by linearly interpolating equidistant points."
+  (mk-linear-fenv
+   (loop for x from 0 to 1 by (/ 1 (1- (length numbers)))
+	 for y in numbers
+	 collect (list x y))))
 
 ;; (defun mk-sin-fenv (points)
 ;;   "Returns a fenv which interpolates the given points by a sin function. Using only the intervals [0,pi/2] and [pi, 3pi/4] results in edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
@@ -206,7 +213,9 @@
 
 (defun steps-fenv (&rest numbers)
   "Outputs a fenv composed of constant functions defined by numbers."
-  (funcs->fenv (mapcar #'(lambda (x) #'(lambda (ignore) x))
+  (funcs->fenv (mapcar #'(lambda (x) #'(lambda (_)
+					 (declare (ignore _))
+					 x))
 			   numbers)))
 
 ; (v (steps-fenv 2 4 3 5))
@@ -239,8 +248,10 @@
   (assert (> shape 0))
   (make-fenv #'(lambda (x) (exp x)) :min (- shape) :max 0))
 
-(defun constant-fenv (value)
-  (make-fenv #'(lambda (x) value)))
+(defun constant-fenv (value)  
+  (make-fenv #'(lambda (x)
+		 (declare (ignore x))
+		 value)))
 
 
 ;;;
