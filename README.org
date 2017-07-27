@@ -9,11 +9,9 @@
   
   The instructions below use git for the installation. Even though it is a bit more involved at first, it allows for convenient updates later, and you can even contribute to the development later. 
 
-  Install [[https://git-scm.com][git]] (if you have not done already).
-
-  Also, you should register at [[https://github.com][GitHub]].
+  Install [[https://git-scm.com][git]] (if you have not done already). Also, you should register at [[https://github.com][GitHub]].
     
-  Download the present software with git into a directory where [[https://common-lisp.net/project/asdf/][ASDF]] can find the software, e.g., [[https://common-lisp.net/project/asdf/asdf/Quick-start-summary.html#Quick-start-summary][=~/common-lisp/=]]. For example, on UNIX incl. OS X you can enter the following commands at the command line (after you created the directory =~/common-lisp/=). Note that =$= is the terminal prompt here, you do not need to enter that :)
+  Download the present software with git into a directory where [[https://common-lisp.net/project/asdf/][ASDF]] can find the software, e.g., [[https://common-lisp.net/project/asdf/asdf/Quick-start-summary.html#Quick-start-summary][~/common-lisp/]]. For example, on UNIX incl. OS X you can enter the following commands at the command line (after you created the directory =~/common-lisp/=). Note that =$= is the terminal prompt here, you do not need to enter that :)
 
 #+begin_src bash :tangle yes
 $ cd ~/common-lisp
@@ -126,4 +124,4 @@ $ git pull
 
 
 
-  The [[./doc/index.html][documentation]] briefly explains the various functions. There are also more examples in this [[./tests/test-fenv.lisp][test file]].
+  The [[./doc/index.html][documentation]] briefly explains the various functions (at Github, this link currently only shows the HTML sources of the documentation, but if you installed the software you can browse the documentation itself). There are also more examples in this [[./tests/test-fenv.lisp][test file]].
