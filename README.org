@@ -122,3 +122,18 @@ $ git pull
 
 
   The [[./doc/index.html][documentation]] briefly explains the various functions (at Github, this link currently only shows the HTML sources of the documentation, but if you installed the software you can browse the documentation itself). There are also more examples in this [[./tests/test-fenv.lisp][test file]].
+
+* Contribute
+  
+  Once you understand the general format of fenvs, it should be easy to come up with new ideas for how to define and transform such envelopes and to extend this library. For example, what about new functions to interpolate between given points in new ways?
+
+  Your contribution is welcome!
+  
+  For posting ideas, discussions and bug reports please use GitHub issues.
+
+
+* License
+
+  Distributed under the GNU General Public License.
+  
+  Copyright © 2017 Torsten Anders
