@@ -36,14 +36,18 @@
 
 ; (fenv->list (make-fenv #'sin :max pi) 10)
 
+(defun l (fenv &optional (number 100))
+  "Shorthand name function for fenv->list Convenience function for using fenvs, e.g., in Opusmodus."
+  (fenv->list fenv number))
 
 (defun fenv->vector (fenv &optional (number 100))
   "Samples a fenv from 0 to 1 (including) and collects samples in a vector. Number is number of samples (if number=1, then the last fenv value is returned)."
   (apply #'vector (fenv->list fenv number)))
 
-(defun v (fenv &optional number)
-  "Shorthand name function for fe:fenv->vector. Convenience function for using fenvs in Opusmodus."
+(defun v (fenv &optional (number 100))
+  "Shorthand name function for fenv->vector. Convenience function for using fenvs, e.g., in Opusmodus."
   (fenv->vector fenv number))
+
 
 ;;;
 ;;; generators
@@ -137,9 +141,9 @@
   (defun fenv-seq (&rest funcenvs-and-points)
     "Combines an arbitrary number of fenvs to a single fenv. Expects its args of form &rest func num func num ... func. The numbers between the funcenvs specify the start resp. end point of a certain fenv. All numbers should be between 0--1 (exclusive)."
     (let ((points (append		; 0, <vals>, 1
-		    (at-even-position
+		    (tu:at-even-position
 		     (cons 0 funcenvs-and-points)) (list 1))) 
-	  (fenvs (at-even-position funcenvs-and-points)))
+	  (fenvs (tu:at-even-position funcenvs-and-points)))
       (aux fenvs points)))
   
   (defun funcs->fenv (funcs &key (min 0) (max 1))
@@ -180,7 +184,9 @@
 
 (defun saw1-fenv (n &key (amplitude 1) (offset 0))
   "Defines an fenv of saw shape (descending) with n periods."
-  (reverse-fenv (saw n :amplitude amplitude :offset offset)))
+  (reverse-fenv (saw-fenv n :amplitude amplitude :offset offset)))
+
+; (v (saw1-fenv 10))
 
 (defun triangle-fenv (n &key (amplitude 1) (offset 0))
   (scale-fenv
@@ -203,6 +209,8 @@
   (funcs->fenv (mapcar #'(lambda (x) #'(lambda (ignore) x))
 			   numbers)))
 
+; (v (steps-fenv 2 4 3 5))
+
 #| ;; currently depends on pw::g-random
 (defun random-fenv (&key (min-y 0.0) (max-y 1.0))
   "A fenv of random numbers between min-y and max-y, which can be numbers or other fenvs."
@@ -218,11 +226,13 @@
 
 (defun random-steps-fenv (n &key (min-y 0.0) (max-y 1.0))
   (assert (<= min-y max-y))
-  (apply #'steps
+  (apply #'steps-fenv
 	 (loop repeat n
 	       collect (+ (random (abs (* (- max-y min-y)
 					  1.0)))
-			  min-y))))	       
+			  min-y))))	
+
+; (v (random-steps-fenv 10))       
 
 (defun rising-expon-fenv (shape)
   "Outputs an rising fenv with exponential shape. y in interval (0, 1]. The bigger shape is the steeper the fenv is. shape must be > 0."
@@ -264,10 +274,11 @@
   (apply #'combine-fenvs (list #'expt fenv1 fenv2)))
 
 
+#| ;; depends on random-fenv, which in turn currently depends on pw::g-random
 (defun randomise-fenv (fenv &key (max-random-offset 1.0))
   "Returns a randomised version of fenv, were y values can be over/under compared to fenv by up to max-random-offset. max-random-offset can be a number or another fenv."
   (add-fenvs fenv (random-fenv :min-y (* -1 max-random-offset) :max-y max-random-offset)))
-
+|#
 
 (defun reverse-fenv (fenv)
   (make-fenv
@@ -307,14 +318,6 @@
        (y fenv1 (y fenv2 x)))))
  
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; utils:
-;;;
-
-(defun at-even-position (in-list)
-  (at-position in-list 2 0))
 
 
 ;;; EOF

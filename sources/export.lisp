@@ -2,7 +2,7 @@
 
 (export '(;; data structure
 	  fenv y fenv?
-	  fenv->list fenv->vector v
+	  fenv->list fenv->vector v ; l
 	  ;; macros
 	  linear-fenv sin-fenv sin-fenv1 expon-fenv
 	  linear-fenv-fn sin-fenv-fn sin-fenv1-fn expon-fenv-fn

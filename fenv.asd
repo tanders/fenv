@@ -18,5 +18,6 @@
 	       ;; (:file "sources/menus") ;; only needed when used within PWGL
 	       )
   :depends-on (; "gnuplot"  ;; not needed for Opusmodus anymore
+	       "ta-utilities"
 	       ))
 
