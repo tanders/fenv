@@ -4,8 +4,8 @@
 	  fenv y fenv?
 	  fenv->list fenv->vector v ; l
 	  ;; macros
-	  linear-fenv sin-fenv sin-fenv1 expon-fenv
-	  linear-fenv-fn sin-fenv-fn sin-fenv1-fn expon-fenv-fn
+	  linear-fenv sin-fenv sin-fenv1 expon-fenv constant-segements-fenv
+	  linear-fenv-fn sin-fenv-fn sin-fenv1-fn expon-fenv-fn constant-segements-fenv-fn
 	  ;; Concrete generators
 	  mk-sin-fenv
 	  saw-fenv saw1-fenv triangle-fenv square-fenv
