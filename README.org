@@ -2,7 +2,7 @@
 
   Fenv is a Common Lisp library of highly flexible envelopes for algorithmic composition. The software represents envelopes as numerical functions, called fenvs. It provides a rich set of functions to generate, combine and transform these envelopes. 
   
-  I am currently using Fenv within Opusmodus (http://opusmodus.com/).
+  I am currently using Fenv within [[http://opusmodus.com/][Opusmodus]].
 
 
 * Installation
@@ -51,7 +51,7 @@ $ git pull
 (require :fenv)
 #+end_src  
 
-  If you want to use Fenv from within another Lisp package (e.g., the Openmusic package, =:om=), do the following. 
+  If you want to use Fenv from within another Lisp package (e.g., the Opusmodus package, =:om=), do the following. 
 
 #+begin_src common-lisp :tangle yes
 (in-package :om) ;; insert your actual package
@@ -122,6 +122,7 @@ $ git pull
 
 
   The [[./doc/index.html][documentation]] briefly explains the various functions (at Github, this link currently only shows the HTML sources of the documentation, but if you installed the software you can browse the documentation itself). There are also more examples in this [[./tests/test-fenv.lisp][test file]].
+
 
 * Contribute
   
