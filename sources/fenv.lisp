@@ -326,6 +326,10 @@
 ;; hp-filter (fenv)
 ;; lp-filter (fenv)
 
+(defun fenv-section (fenv &key min max)
+  "New fenv that is segment of fenv from its x values min to max."
+  (make-fenv  #'(lambda (x) (y fenv x)) 
+             :min min :max max))
 
 (defun waveshape (fenv1 fenv2)
   "Returns an fenv which reads fenv1 'through' fenv2: the y value of fenv2 at a given x value access the y of fenv1 (take care to keep output of fenv2 in interval [0,1])."

@@ -15,6 +15,6 @@
 	  funcs->fenv fenv-seq osciallator
 	  ;; Transformers
 	  add-fenvs multiply-fenvs reverse-fenv inverse-fenv scale-fenv rescale-fenv
-	  combine-fenvs waveshape
+	  combine-fenvs fenv-section waveshape
 	  )
 	:fe)
