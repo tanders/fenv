@@ -14,7 +14,7 @@
 	  make-fenv make-fenv1 points->fenv list->fenv
 	  funcs->fenv fenv-seq osciallator
 	  ;; Transformers
-	  add-fenvs multiply-fenvs reverse-fenv scale-fenv rescale-fenv
+	  add-fenvs multiply-fenvs reverse-fenv inverse-fenv scale-fenv rescale-fenv
 	  combine-fenvs waveshape
 	  )
 	:fe)

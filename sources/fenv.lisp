@@ -292,13 +292,18 @@
 |#
 
 (defun reverse-fenv (fenv)
+  "Reverse fenv (turn it backwards)."
   (make-fenv
    #'(lambda (x)
        (y fenv (- 1 x)))))
 
 
-;(defun inverse-fenv (fenv &optional (axis (funcall fenv 0)))
-;  )
+(defun inverse-fenv (fenv &optional (axis 0))
+  "Inverse (mirror) fenv horizontally at the y value axis (the fenv is shifted so that axis becomes the former 0)."
+  (make-fenv
+   #'(lambda (x)
+       (- axis (y fenv x)))))
+
 
 (defun scale-fenv (fenv mul add)
   (combine-fenvs #'+ add
