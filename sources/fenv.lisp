@@ -35,6 +35,8 @@
 	  collect (y fenv n))))
 
 ; (fenv->list (make-fenv #'sin :max pi) 10)
+;; (om:list-plot (fenv->list (make-fenv #'sin :max pi) 10))
+
 
 (defun l (fenv &optional (number 100))
   "Shorthand name function for fenv->list Convenience function for using fenvs, e.g., in Opusmodus."
