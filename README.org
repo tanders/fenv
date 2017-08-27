@@ -34,7 +34,7 @@ $ git clone https://github.com/tanders/ta-utilities.git
 
 ** Updating your software
 
-   You can update your software later at the terminal in the following way.
+   If there are [[https://github.com/tanders/fenv/commits/master][changes]], you can update your software later at the terminal in the following way.
 
 #+begin_src bash :tangle yes
 $ cd ~/common-lisp/fenv
