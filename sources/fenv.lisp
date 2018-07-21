@@ -101,12 +101,25 @@
 					:min x1 :max x2))
 		points))
 
-(defun list->fenv (numbers)
-  "Translates a list of numbers into a fenv by linearly interpolating equidistant points."
-  (mk-linear-fenv
-   (loop for x from 0 to 1 by (/ 1 (1- (length numbers)))
-	 for y in numbers
-	 collect (list x y))))
+(defun list->fenv (numbers &key (type :linear))
+  "Translates a list of numbers into a fenv. If type is :linear, the fenv linearly interpolates equidistant points, but it type is :steps then the fenv simply switches between the points in a step fashion."
+  (case (length numbers)
+    (0 (error "numbers cannot be an empty list."))
+    (1 (apply #'constant-fenv numbers))
+    (T 
+     (ccase type
+       (:linear (mk-linear-fenv
+		 (loop for x from 0 to 1 by (/ 1 (1- (length numbers)))
+		    for y in numbers
+		    collect (list x y))))
+       (:steps (apply #'steps-fenv numbers))))))
+
+; (v (list->fenv '(2 4 3 5)) 6)
+; (v (list->fenv '(2 4 3 5) :type :steps) 6)
+; (v (list->fenv '(2 4 3 5) :type :step) 6)
+;; a list of a single value results in a constant fenv
+; (v (list->fenv '(2)) 6)
+
 
 ;; (defun mk-sin-fenv (points)
 ;;   "Returns a fenv which interpolates the given points by a sin function. Using only the intervals [0,pi/2] and [pi, 3pi/4] results in edges. Expects a list of x-y-pairs as (0 y1) ... (1 yn)."
@@ -228,7 +241,7 @@
 					 x))
 			   numbers)))
 
-; (v (steps-fenv 2 4 3 5))
+; (v (steps-fenv 2 4 3 5) 6)
 
 #| ;; currently depends on pw::g-random
 (defun random-fenv (&key (min-y 0.0) (max-y 1.0))
