@@ -28,14 +28,22 @@
   (funcall (fenv fenv) x))
 
 
-(defun fenv->list (fenv &optional (number 100))
-  "Samples a fenv from 0 to 1 (including) and collects samples in a list. Number is number of samples (if number=1, then the last fenv value is returned)."
-  (if (= number 1) (list (y fenv 1))
-    (loop for n from 0 to 1 by (/ 1 (1- number))
-	  collect (y fenv n))))
+(defun fenv->list (fenv &optional (number 100) (number=1 :last))
+  "Samples a fenv from 0 to 1 (including) and collects samples in a list. Number is number of samples. If number equals 1, then number=1 sets which element is chosen (can be :first, :middle or :last)."
+  (case number
+    (0 nil)
+    (1 (list (y fenv (case number=1
+		      (:first 0)
+		      (:middle 0.5)
+		      (:last 1)))))
+    (T (loop for n from 0 to 1 by (/ 1 (1- number))
+	  collect (y fenv n)))))
 
-; (fenv->list (make-fenv #'sin :max pi) 10)
+;; (fenv->list (make-fenv #'sin :max pi) 10)
 ;; (om:list-plot (fenv->list (make-fenv #'sin :max pi) 10))
+;; In case of number = 1 chose the first element
+;; (fenv->list (linear-fenv (0 0) (1 1)) 1 :first)
+;; (fenv->list (make-fenv #'sin :max pi) 0)
 
 
 (defun l (fenv &optional (number 100))
