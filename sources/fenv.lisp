@@ -101,24 +101,62 @@
 					:min x1 :max x2))
 		points))
 
-(defun list->fenv (numbers &key (type :linear))
-  "Translates a list of numbers into a fenv. If type is :linear, the fenv linearly interpolates equidistant points, but it type is :steps then the fenv simply switches between the points in a step fashion."
-  (case (length numbers)
-    (0 (error "numbers cannot be an empty list."))
-    (1 (apply #'constant-fenv numbers))
-    (T 
-     (ccase type
-       (:linear (mk-linear-fenv
-		 (loop for x from 0 to 1 by (/ 1 (1- (length numbers)))
-		    for y in numbers
-		    collect (list x y))))
-       (:steps (apply #'steps-fenv numbers))))))
+#| ;; Why is this definition here? Can I remove it?
+(defun matrix-multiply (a b)
+  (let ((*print-array* nil))
+    (assert (and (= (array-rank a) (array-rank b) 2)
+		 (= (array-dimension a 1) (array-dimension b 0)))
+	    (a b)
+	    "Cannot multiply ~S by ~S." a b)
+    (really-matrix-multiply a b)))
+|#
 
-; (v (list->fenv '(2 4 3 5)) 6)
-; (v (list->fenv '(2 4 3 5) :type :steps) 6)
-; (v (list->fenv '(2 4 3 5) :type :step) 6)
+(defun list->fenv (numbers &key (type :linear) xs)
+  "Translates a list of numbers into a fenv. If type is :linear, the fenv linearly interpolates equidistant points, but it type is :steps then the fenv simply switches between the points in a step fashion.
+
+If xs is non-nil, it is a list of the x values to use (arg numbers contains the y values). By default, equidistant x values are used.
+xs should be as long as numbers. 
+
+NOTE: If :type is :linear, xs should be in the interval [0, 1], i.e. include 0 and 1. By contrast, if :type is :steps then xs should be the start positions of numbers, i.e. in the interval [0, 1) -- excluding the final 1 (which is internally added automatically).
+"
+  (assert (if xs
+	      (= (length numbers) (length xs))
+	      T)
+	  (numbers xs)
+	  "Uneven length: numbers is ~A and xs is ~A" numbers xs)
+  (let ((l (length numbers)))
+    (case l
+      (0 (error "numbers cannot be an empty list."))
+      (1 (apply #'constant-fenv numbers))
+      (T
+       (let ((actual-xs (if xs
+			    (ccase type
+			      (:linear xs)
+			      (:steps (append xs '(1))))
+			    (loop for x from 0 to 1 by (/ 1 (ccase type
+							      (:linear (1- l))
+							      (:steps l)))
+			       collect x))))
+	 (ccase type
+	   (:linear (linear-fenv-fn ; mk-linear-fenv
+		     (loop for x in actual-xs
+			for y in numbers
+			collect (list x y))))
+	   (:steps (constant-segements-fenv-fn
+		    (loop for x in actual-xs
+		       ;; Note: constant-segements-fenv-fn never reachest last y value, hence some dummy y value is added.
+		       for y in (append numbers '(1))
+		       collect (list x y))))))))))
+;; (apply #'steps-fenv numbers)
+
+; (l (list->fenv '(2 4 3 5)) 4)
+; (l (list->fenv '(2 4 3 5)) 6)
+; (l (list->fenv '(2 4 3 5) :type :steps) 8)
+; (l (list->fenv '(2 4 3 5) :type :steps) 6)
 ;; a list of a single value results in a constant fenv
-; (v (list->fenv '(2)) 6)
+; (l (list->fenv '(2)) 6)
+; (l (list->fenv '(2 4 3 5) :type :steps :xs '(0 1/8 1/4 1/2)) 8)
+; => (2 4 3 3 5 5 5 5)
 
 
 ;; (defun mk-sin-fenv (points)
