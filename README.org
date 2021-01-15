@@ -71,7 +71,7 @@ $ git pull
 #+end_src  
 
 
-  A fenv (function envelope) is an envelope that internally is defined by a numeric function. You can turn arbitrary numeric functions into an envelope with the function =make-fenv=. Here is the function f(x)=y.
+  A fenv (function envelope) is an envelope that internally is defined by a numeric function. You can turn arbitrary numeric functions into an envelope with the function =make-fenv=. Here is the function f(x)=x.
 
 #+begin_src lisp :tangle yes
 (fenv:v (fenv:make-fenv #'(lambda (x) x)))
