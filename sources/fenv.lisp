@@ -337,12 +337,12 @@ NOTE: If :type is :linear, xs should be in the interval [0, 1], i.e. include 0 a
   (apply #'combine-fenvs (cons #'+ fenvs)))
 
 (defun multiply-fenvs (&rest fenvs)
-  "Returns a fenv which adds all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order."
+  "Returns a fenv which multiplies all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order."
   (apply #'combine-fenvs (cons #'* fenvs)))
 
 
 (defun expt-fenvs (fenv1 fenv2)
-  "Returns a fenv which adds all given fenvs. fenvs can consist of fenvs and numeric values (i.e. constant functions) in any order."
+  "Returns a fenv which raises fenv1 to the power of fenv2. fenvs can consist of fenvs and numeric values (i.e. constant functions)."
   (apply #'combine-fenvs (list #'expt fenv1 fenv2)))
 
 
