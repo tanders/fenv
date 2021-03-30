@@ -1,6 +1,6 @@
 * Fenv
 
-  This folder contains an internal Aiva development continuation of the open-source library [[https://github.com/tanders/fenv][fenv]], a Common Lisp library of highly flexible envelopes for algorithmic composition. The software represents envelopes as numerical functions, called fenvs. It provides a rich set of functions to generate, combine and transform these envelopes. 
+  This is a Common Lisp library providing highly flexible envelopes for algorithmic composition. The software represents envelopes as numerical functions, called fenvs. It provides a rich set of functions to generate, combine and transform these envelopes. 
   
   I am currently using Fenv within [[http://opusmodus.com/][Opusmodus]].
 
