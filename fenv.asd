@@ -14,7 +14,6 @@
 	       ;; (:file "sources/random-distribution")
 	       ;; (:file "sources/plot")  ;; not needed for Opusmodus anymore
 	       ;; (:file "sources/in-cm")
-	       (:file "sources/export") 
 	       ;; (:file "sources/menus") ;; only needed when used within PWGL
 	       )
   :depends-on (; "gnuplot"  ;; not needed for Opusmodus anymore
