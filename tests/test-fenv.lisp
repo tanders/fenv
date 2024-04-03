@@ -91,7 +91,7 @@
 (v (random-steps-fenv 20 :min-y -1 :max-y 3))
 
 (v (combine-fenvs #'*
-		    (triangle 7)
+		    (triangle-fenv 7)
 		    (linear-fenv (0 0) (0.3 1) (1 0))))
 
 
@@ -104,15 +104,15 @@
 
 ;;
 (let ((fenv (make-fenv #'sin :max pi)))
-  (v (mapcar #'(lambda (fenv2)
-		    (waveshape fenv fenv2))
-		(list
-		 (make-fenv #'identity) ; no waveshaping
-		 (make-fenv #'(lambda (x) (/ (expt 2 x) 32))
-			   :min -5 :max 5)
-		 (make-fenv #'cos
-			   :max (* pi 0.5))
-		 fenv))))
+  (mapcar #'(lambda (fenv2)
+	      (fenv->list (waveshape fenv fenv2)))
+	  (list
+	   (make-fenv #'identity) ; no waveshaping
+	   (make-fenv #'(lambda (x) (/ (expt 2 x) 32))
+		      :min -5 :max 5)
+	   (make-fenv #'cos
+		      :max (* pi 0.5))
+	   fenv)))
 
 (v (rising-expon-fenv 10))
 
