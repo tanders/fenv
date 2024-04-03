@@ -195,32 +195,32 @@ NOTE: If :type is :linear, xs should be in the interval [0, 1], i.e. include 0 a
 
 
 (flet ((aux (fenvs points)
-	    ;; points: (0 ... 1)
-	    (make-fenv
-	     #'(lambda (x)
-		 (let* ((pos (position x points :test #'<))
-			(fenv (if pos
-			  (make-fenv1 (fenv (nth (1- pos) fenvs))
-					  :min (nth (1- pos) points)
-					  :max (nth pos points))
-			  (first (last fenvs)))))
-		   (y fenv x))))))
+	 ;; points: (0 ... 1)
+	 (make-fenv
+	  #'(lambda (x)
+	      (let* ((pos (position x points :test #'<))
+		     (fenv (if pos
+			       (make-fenv1 (fenv (nth (1- pos) fenvs))
+					   :min (nth (1- pos) points)
+					   :max (nth pos points))
+			       (first (last fenvs)))))
+		(y fenv x))))))
 
   (defun fenv-seq (&rest funcenvs-and-points)
     "Combines an arbitrary number of fenvs to a single fenv. Expects its args of form &rest func num func num ... func. The numbers between the funcenvs specify the start resp. end point of a certain fenv. All numbers should be between 0--1 (exclusive)."
     (let ((points (append		; 0, <vals>, 1
-		    (tu:at-even-position
-		     (cons 0 funcenvs-and-points)) (list 1))) 
+		   (tu:at-even-position
+		    (cons 0 funcenvs-and-points)) (list 1))) 
 	  (fenvs (tu:at-even-position funcenvs-and-points)))
       (aux fenvs points)))
   
   (defun funcs->fenv (funcs &key (min 0) (max 1))
     "Converts a list of unary numeric functions to a single fenv. Max and min a given for all functions and the functions are equally spaced in the func fenv."
     (let ((points (loop for n from 0 to 1 by (/ 1 (length funcs))
-			collect n))
+		     collect n))
 	  (fenvs (mapcar #'(lambda (f)
-				 (make-fenv f :min min :max max))
-			     funcs)))
+			     (make-fenv f :min min :max max))
+			 funcs)))
       ;;(format T "~%debug: points:~A fenvs ~A" points fenvs)
       (aux fenvs points)))
 
@@ -228,7 +228,7 @@ NOTE: If :type is :linear, xs should be in the interval [0, 1], i.e. include 0 a
     "Defines a fenv by repeating fenv n times."
     (let ((fenvs (make-list n :initial-element fenv))
 	  (points (loop for i from 0 to 1 by (/ 1 n)
-			collect i)))
+		     collect i)))
       (aux fenvs points))))
 
 ;; inconsistently named, but function name sin-fenv already taken by a macro
